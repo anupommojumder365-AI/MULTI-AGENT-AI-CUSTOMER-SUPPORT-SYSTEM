@@ -3,12 +3,12 @@
   "name": "NovaCart • Support Resolution Engine",
   "active": false,
   "isArchived": false,
-  "versionId": "7a62d2c2-5d34-4b09-9ef8-8d7c69e50ed9",
+  "versionId": "aefa2e1d-88de-4588-9176-712b5a378130",
   "activeVersionId": null,
   "triggerCount": 0,
-  "nodeCount": 19,
+  "nodeCount": 20,
   "createdAt": "2026-11-05T20:31:43.634Z",
-  "updatedAt": "2026-11-06T11:31:18.956Z",
+  "updatedAt": "2026-11-06T11:39:18.993Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -312,6 +312,24 @@
       ]
     },
     "Notify human review": {
+      "main": [
+        [
+          {
+            "node": "Record Slack delivery",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Record Slack delivery": {
       "main": [
         null,
         [
@@ -777,6 +795,32 @@
       "maxTries": 3,
       "waitBetweenTries": 5000,
       "webhookId": "17bee460-7009-4fe3-91c2-eee3cfe40bd2"
+    },
+    {
+      "id": "7ddca7be-38e7-4dc6-bb35-298416efef7c",
+      "name": "Record Slack delivery",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3900,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_mark_slack_sent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({p_ticket:$(\"Commit guarded result\").first().json.ticket_id,p_timestamp:String($json.ts || \"\")}) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     }
   ],
   "nodeGroups": [],
