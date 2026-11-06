@@ -1,14 +1,14 @@
 {
   "id": "mM3NBM7kLZWP73Ix",
-  "name": "NovaCart \u2022 Gmail Intake",
-  "active": false,
+  "name": "NovaCart • Gmail Intake",
+  "active": true,
   "isArchived": false,
-  "versionId": "a07467e8-869f-480d-8da4-a1eb2f9b297f",
-  "activeVersionId": null,
-  "triggerCount": 0,
+  "versionId": "66e77374-0c00-4f6e-b9cb-1ce57fa57bf2",
+  "activeVersionId": "66e77374-0c00-4f6e-b9cb-1ce57fa57bf2",
+  "triggerCount": 1,
   "nodeCount": 2,
   "createdAt": "2026-11-05T20:43:40.180Z",
-  "updatedAt": "2026-11-05T20:43:40.180Z",
+  "updatedAt": "2026-11-06T11:50:11.924Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -73,14 +73,13 @@
         "authentication": "oAuth2",
         "simple": false,
         "filters": {
-          "q": "subject:NOVACART_SANDBOX label:novacart-demo",
+          "q": "from:anupommojumdernew101@gmail.com subject:NOVACART_SANDBOX",
           "readStatus": "both"
         },
         "options": {
           "downloadAttachments": false
         }
-      },
-      "credentials": {}
+      }
     },
     {
       "id": "943fac07-7be9-4404-8c98-5b9267694aeb",
@@ -105,8 +104,7 @@
       },
       "retryOnFail": true,
       "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "credentials": {}
+      "waitBetweenTries": 2000
     }
   ],
   "nodeGroups": [
@@ -119,7 +117,6 @@
       "description": "Deduplicate by Gmail ID and hold unverified email for staff identity verification; no order data disclosed."
     }
   ],
-  "activeVersion": null,
   "meta": {
     "aiBuilderAssisted": true,
     "builderVariant": "mcp"
