@@ -1,0 +1,5 @@
+# Implementation update — 2026-11-06
+
+The prior final-report predates these changes. Mistral embeddings return 1024 dimensions; 36 policy vectors were stored (indexing execution 103). All eight agent workflows use Groq openai/gpt-oss-20b; a synthetic journey recorded eight agent outputs, one simulated pending refund and one QA evaluation for ticket 9b56ab70-aa08-4ff9-b90f-8064442e2297 (core execution 128). This case used a manual email-shaped envelope, not an actual Gmail event. Slack notification for this ticket was sent separately in test execution 137. Refund was not paid; customer reply remains held.
+
+Database regression run db-suite-v3: 71/71 passed. Slack automatic workflow integration and authenticated browser journey still require verification. Free-tier rate limits required two 60-second waits and bounded retries; capacity and latency are not production validated. All inbound workflows remain inactive. Vercel deployment is protected by SSO. Source includes sanitized workflow exports; credentials must be attached during import. No real payment provider is connected.
