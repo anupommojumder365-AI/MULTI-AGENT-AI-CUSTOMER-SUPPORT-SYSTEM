@@ -1,14 +1,14 @@
 {
   "id": "Ct08zmtjQluSsr73",
-  "name": "NovaCart \u2022 Intent Classification",
-  "active": false,
+  "name": "NovaCart • Intent Classification",
+  "active": true,
   "isArchived": false,
-  "versionId": "c70edee8-b130-4228-a6bd-5844bff64ccb",
-  "activeVersionId": null,
+  "versionId": "c0d0f9db-f99b-4770-9a91-9df4db1a3fcd",
+  "activeVersionId": "c0d0f9db-f99b-4770-9a91-9df4db1a3fcd",
   "triggerCount": 0,
   "nodeCount": 5,
   "createdAt": "2026-11-05T20:29:43.752Z",
-  "updatedAt": "2026-11-05T20:29:43.752Z",
+  "updatedAt": "2026-11-06T11:03:20.219Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -62,23 +62,23 @@
         ]
       ]
     },
-    "Reasoning model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Intent Classification",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Strict JSON contract": {
       "ai_outputParser": [
         [
           {
             "node": "Intent Classification",
             "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reasoning model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Intent Classification",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -119,29 +119,6 @@
       }
     },
     {
-      "id": "b42d5b34-dbb1-43f9-8292-dde56568641e",
-      "name": "Reasoning model",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        288,
-        352
-      ],
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "id",
-          "value": "gpt-4.1-mini"
-        },
-        "options": {
-          "temperature": 0,
-          "timeout": 60000,
-          "maxRetries": 2
-        }
-      },
-      "credentials": {}
-    },
-    {
       "id": "f26485ca-3c5d-43ae-82c9-a12da2a7ceca",
       "name": "Strict JSON contract",
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
@@ -166,24 +143,27 @@
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
-        "jsCode": "const ctx=$('Case context').first().json; const out=$input.first().json.output; if(!out || typeof out.summary!=='string' || !Array.isArray(out.policy_ids)) throw new Error('Invalid agent output'); const known=new Set((ctx.policies||[]).map(x=>x.id)); if(out.policy_ids.some(x=>!known.has(x))) throw new Error('Unknown policy citation'); return [{json:{...ctx,agents:[...(ctx.agents||[]),{agent:\"Intent Classification\",output:out,model:'gpt-4.1-mini'}]}}];"
+        "jsCode": "const ctx=$('Case context').first().json; const out=$input.first().json.output; if(!out || typeof out.summary!=='string' || !Array.isArray(out.policy_ids)) throw new Error('Invalid agent output'); const known=new Set((ctx.policies||[]).map(x=>x.id)); if(out.policy_ids.some(x=>!known.has(x))) throw new Error('Unknown policy citation'); return [{json:{...ctx,agents:[...(ctx.agents||[]),{agent:\"Intent Classification\",output:out,model:'openai/gpt-oss-20b'}]}}];"
+      }
+    },
+    {
+      "id": "fc6b7ab1-81ce-4efb-979d-f50c562dbc14",
+      "name": "Reasoning model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        420,
+        400
+      ],
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {
+          "temperature": 0
+        }
       }
     }
   ],
-  "nodeGroups": [
-    {
-      "id": "a7699f55-8b51-4f76-b6b1-ddc37f9de715",
-      "name": "Grounded reasoning",
-      "nodeNames": [
-        "Reasoning model",
-        "Strict JSON contract",
-        "Intent Classification",
-        "Validate and append execution"
-      ],
-      "description": "Reason over verified facts, validate structured output and preserve the case envelope."
-    }
-  ],
-  "activeVersion": null,
+  "nodeGroups": [],
   "meta": {
     "aiBuilderAssisted": true,
     "builderVariant": "mcp"
