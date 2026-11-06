@@ -1,0 +1,1 @@
+do $$ declare f text; begin select pg_get_functiondef('public.novacart_dashboard()'::regprocedure) into f; if position('embedding is not null as embedded' in f)=0 then raise exception 'Expected expression not found'; end if; f:=replace(f,'embedding is not null as embedded','(embedding_mistral is not null or embedding is not null) as embedded'); execute f; end $$;
