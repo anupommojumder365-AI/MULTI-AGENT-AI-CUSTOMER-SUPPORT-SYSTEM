@@ -3,12 +3,12 @@
   "name": "NovaCart • Support Resolution Engine",
   "active": false,
   "isArchived": false,
-  "versionId": "aefa2e1d-88de-4588-9176-712b5a378130",
+  "versionId": "1d667aa6-cf61-4459-8bc2-edba0f98c33d",
   "activeVersionId": null,
   "triggerCount": 0,
   "nodeCount": 20,
   "createdAt": "2026-11-05T20:31:43.634Z",
-  "updatedAt": "2026-11-06T11:39:18.993Z",
+  "updatedAt": "2026-11-06T11:44:07.100Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -812,7 +812,7 @@
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({p_ticket:$(\"Commit guarded result\").first().json.ticket_id,p_timestamp:String($json.ts || \"\")}) }}",
+        "jsonBody": "={{ JSON.stringify({p_ticket:$(\"Commit guarded result\").first().json.ticket_id,p_timestamp:String($json.message?.ts || $json.ts || \"\")}) }}",
         "options": {
           "timeout": 30000
         }
