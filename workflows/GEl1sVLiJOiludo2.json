@@ -1,14 +1,14 @@
 {
   "id": "GEl1sVLiJOiludo2",
-  "name": "NovaCart \u2022 Support Resolution Engine",
+  "name": "NovaCart • Support Resolution Engine",
   "active": false,
   "isArchived": false,
-  "versionId": "1f618eb2-8bd3-4456-ae2d-2de907abc51c",
+  "versionId": "7a62d2c2-5d34-4b09-9ef8-8d7c69e50ed9",
   "activeVersionId": null,
   "triggerCount": 0,
-  "nodeCount": 16,
+  "nodeCount": 19,
   "createdAt": "2026-11-05T20:31:43.634Z",
-  "updatedAt": "2026-11-05T20:40:47.319Z",
+  "updatedAt": "2026-11-06T11:31:18.956Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -62,6 +62,204 @@
         ]
       ]
     },
+    "Retrieve policies": {
+      "main": [
+        [
+          {
+            "node": "Merge policy evidence",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge policy evidence": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Intent Classification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Intent Classification": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Knowledge Retrieval",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Knowledge Retrieval": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Order Resolution",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Order Resolution": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Refund Decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Refund Decision": {
+      "main": [
+        [
+          {
+            "node": "Respect model rate limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Customer Response": {
+      "main": [
+        [
+          {
+            "node": "NovaCart • Human Escalation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • Human Escalation": {
+      "main": [
+        [
+          {
+            "node": "Wait before QA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart • QA Evaluation": {
+      "main": [
+        [
+          {
+            "node": "Commit guarded result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit guarded result": {
+      "main": [
+        [
+          {
+            "node": "Notify human review",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Ignore duplicate requests": {
       "main": [
         [
@@ -91,187 +289,29 @@
         ]
       ]
     },
-    "Retrieve policies": {
+    "Respect model rate limit": {
       "main": [
         [
           {
-            "node": "Merge policy evidence",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
+            "node": "NovaCart • Customer Response",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Merge policy evidence": {
+    "Wait before QA": {
       "main": [
         [
           {
-            "node": "NovaCart \u2022 Orchestrator",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
+            "node": "NovaCart • QA Evaluation",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "NovaCart \u2022 Orchestrator": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Intent Classification",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Intent Classification": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Knowledge Retrieval",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Knowledge Retrieval": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Order Resolution",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Order Resolution": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Refund Decision",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Refund Decision": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Customer Response",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Customer Response": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 Human Escalation",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 Human Escalation": {
-      "main": [
-        [
-          {
-            "node": "NovaCart \u2022 QA Evaluation",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "NovaCart \u2022 QA Evaluation": {
-      "main": [
-        [
-          {
-            "node": "Commit guarded result",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Record recoverable failure",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Commit guarded result": {
+    "Notify human review": {
       "main": [
         null,
         [
@@ -321,8 +361,7 @@
       },
       "retryOnFail": true,
       "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "credentials": {}
+      "waitBetweenTries": 2000
     },
     {
       "id": "4b299f2a-f933-4bd1-9b23-4f9ebf174ff4",
@@ -354,33 +393,6 @@
       }
     },
     {
-      "id": "c1e33266-0e56-494e-b135-c2efaa8700d0",
-      "name": "Embed customer request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        720,
-        128
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/embeddings",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "openAiApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({model:\"text-embedding-3-small\",input:$json.message}) }}",
-        "options": {
-          "timeout": 60000
-        }
-      },
-      "retryOnFail": true,
-      "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "onError": "continueErrorOutput",
-      "credentials": {}
-    },
-    {
       "id": "6e3ee5c7-28f8-485b-8d45-02649c4b99f9",
       "name": "Retrieve policies",
       "type": "n8n-nodes-base.httpRequest",
@@ -391,7 +403,7 @@
       ],
       "parameters": {
         "method": "POST",
-        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_retrieve",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_mistral_retrieve",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -404,8 +416,7 @@
       "retryOnFail": true,
       "maxTries": 3,
       "waitBetweenTries": 2000,
-      "onError": "continueErrorOutput",
-      "credentials": {}
+      "onError": "continueErrorOutput"
     },
     {
       "id": "7e32ff6a-95fc-4e3b-927f-05ee82840bf9",
@@ -424,7 +435,7 @@
     },
     {
       "id": "776a204c-a79d-4981-9e08-d71406ee8f6b",
-      "name": "NovaCart \u2022 Orchestrator",
+      "name": "NovaCart • Orchestrator",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -443,11 +454,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "b2e92f2b-d204-4c53-b7b3-d055cf7e4eef",
-      "name": "NovaCart \u2022 Intent Classification",
+      "name": "NovaCart • Intent Classification",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -466,11 +480,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "7eae1597-1a92-4235-ba19-4ca7fc63be38",
-      "name": "NovaCart \u2022 Knowledge Retrieval",
+      "name": "NovaCart • Knowledge Retrieval",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -489,11 +506,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "b7940e70-8d9a-4c19-b2ff-efd182331100",
-      "name": "NovaCart \u2022 Order Resolution",
+      "name": "NovaCart • Order Resolution",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -512,11 +532,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "132da939-cdfe-492c-83ea-7a61a9c76c37",
-      "name": "NovaCart \u2022 Refund Decision",
+      "name": "NovaCart • Refund Decision",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -535,11 +558,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "a1b5fcff-fea2-415c-8fed-eebace0a99e8",
-      "name": "NovaCart \u2022 Customer Response",
+      "name": "NovaCart • Customer Response",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -558,11 +584,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "abb56967-70da-4353-bddb-a08128767bdc",
-      "name": "NovaCart \u2022 Human Escalation",
+      "name": "NovaCart • Human Escalation",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -581,11 +610,14 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "ae2ac74e-325e-48a2-9a28-9d4952c43395",
-      "name": "NovaCart \u2022 QA Evaluation",
+      "name": "NovaCart • QA Evaluation",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.4,
       "position": [
@@ -604,7 +636,10 @@
           "waitForSubWorkflow": true
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
     },
     {
       "id": "ea83f9f2-66f1-4b06-829b-bdf80a8902d2",
@@ -630,8 +665,7 @@
       "retryOnFail": true,
       "maxTries": 3,
       "waitBetweenTries": 2000,
-      "onError": "continueErrorOutput",
-      "credentials": {}
+      "onError": "continueErrorOutput"
     },
     {
       "id": "c186ea18-95d5-47b3-b457-402b1ce49b01",
@@ -653,35 +687,99 @@
         "options": {
           "timeout": 30000
         }
-      },
-      "credentials": {}
-    }
-  ],
-  "nodeGroups": [
+      }
+    },
     {
-      "id": "1617ccaa-ba86-48a6-87f3-ab137a3825c2",
-      "name": "Guarded support execution",
-      "nodeNames": [
-        "Prepare verified case",
-        "Ignore duplicate requests",
-        "Embed customer request",
-        "Retrieve policies",
-        "Merge policy evidence",
-        "NovaCart \u2022 Orchestrator",
-        "NovaCart \u2022 Intent Classification",
-        "NovaCart \u2022 Knowledge Retrieval",
-        "NovaCart \u2022 Order Resolution",
-        "NovaCart \u2022 Refund Decision",
-        "NovaCart \u2022 Customer Response",
-        "NovaCart \u2022 Human Escalation",
-        "NovaCart \u2022 QA Evaluation",
-        "Commit guarded result",
-        "Record recoverable failure"
+      "id": "e562dfc0-1210-4c6f-b99e-d2693e4d9a7c",
+      "name": "Embed customer request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        650,
+        200
       ],
-      "description": "Verified context, eight reasoning roles, guarded commit and durable failure escalation."
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"mistral-embed\",input:[$json.message]}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    },
+    {
+      "id": "a4f5993c-13df-4861-9fca-706df9937e16",
+      "name": "Respect model rate limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2200,
+        200
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 60,
+        "unit": "seconds"
+      },
+      "webhookId": "a2886eb5-4abb-482b-87c9-0ad743b341da"
+    },
+    {
+      "id": "9b0ad51f-abc1-4a7e-a550-006ab1dc6e39",
+      "name": "Wait before QA",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2900,
+        200
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 60,
+        "unit": "seconds"
+      },
+      "webhookId": "873247d6-e08a-4ca4-a991-8f2ab7cea89e"
+    },
+    {
+      "id": "fc17b5a5-5e53-4aab-85d1-fbba31f1cb4a",
+      "name": "Notify human review",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        3700,
+        200
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "C0CG4CDN74G"
+        },
+        "messageType": "text",
+        "text": "=NovaCart sandbox: ticket {{ $json.ticket_id }} needs human review. Refund request: {{ $json.refund_id || \"none\" }}. Simulated only.",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "webhookId": "17bee460-7009-4fe3-91c2-eee3cfe40bd2"
     }
   ],
-  "activeVersion": null,
+  "nodeGroups": [],
   "meta": {
     "aiBuilderAssisted": true,
     "builderVariant": "mcp"
