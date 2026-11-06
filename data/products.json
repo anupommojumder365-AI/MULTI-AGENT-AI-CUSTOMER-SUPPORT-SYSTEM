@@ -1,0 +1,62 @@
+[
+  {
+    "id": "NC-P01",
+    "name": "NovaBook 14 Laptop",
+    "price": 899,
+    "returnable": true
+  },
+  {
+    "id": "NC-P02",
+    "name": "Wireless Mouse",
+    "price": 29,
+    "returnable": true
+  },
+  {
+    "id": "NC-P03",
+    "name": "USB-C Hub",
+    "price": 59,
+    "returnable": true
+  },
+  {
+    "id": "NC-P04",
+    "name": "Mechanical Keyboard",
+    "price": 99,
+    "returnable": true
+  },
+  {
+    "id": "NC-P05",
+    "name": "27-inch Monitor",
+    "price": 249,
+    "returnable": true
+  },
+  {
+    "id": "NC-P06",
+    "name": "Noise Cancelling Headphones",
+    "price": 149,
+    "returnable": true
+  },
+  {
+    "id": "NC-P07",
+    "name": "Laptop Sleeve",
+    "price": 25,
+    "returnable": true
+  },
+  {
+    "id": "NC-P08",
+    "name": "Webcam",
+    "price": 69,
+    "returnable": true
+  },
+  {
+    "id": "NC-P09",
+    "name": "Charging Dock",
+    "price": 79,
+    "returnable": true
+  },
+  {
+    "id": "NC-P10",
+    "name": "Digital Setup Guide",
+    "price": 15,
+    "returnable": false
+  }
+]

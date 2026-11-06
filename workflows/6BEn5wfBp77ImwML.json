@@ -1,0 +1,185 @@
+{
+  "id": "6BEn5wfBp77ImwML",
+  "name": "NovaCart \u2022 Knowledge Indexing",
+  "active": false,
+  "isArchived": false,
+  "versionId": "b28010dc-4174-4127-8109-405656ef17ea",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 4,
+  "createdAt": "2026-11-05T20:30:46.276Z",
+  "updatedAt": "2026-11-05T20:30:46.276Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "Manual one-time embedding of unembedded fictional NovaCart policies.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Embed NovaCart knowledge": {
+      "main": [
+        [
+          {
+            "node": "Read unembedded policies",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read unembedded policies": {
+      "main": [
+        [
+          {
+            "node": "Create semantic embeddings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create semantic embeddings": {
+      "main": [
+        [
+          {
+            "node": "Save vectors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "6172533e-3adf-424a-b6f0-1015d4057e4a",
+      "name": "Embed NovaCart knowledge",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "6dbe756c-27c9-41cf-9095-18e1e0aa2d85",
+      "name": "Read unembedded policies",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_embedding_batch",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    },
+    {
+      "id": "bb3af57e-2563-4d1e-bf40-6ca7626ffd01",
+      "name": "Create semantic embeddings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        496,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"text-embedding-3-small\",input:$json.entries.map(x=>x.text)}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    },
+    {
+      "id": "21856841-ac27-415b-b5f7-2fcef56dde44",
+      "name": "Save vectors",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_save_embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({p:$json.data.map((x,i)=>({id:$(\"Read unembedded policies\").first().json.entries[i].id,embedding:x.embedding}))}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "6c97c862-fa9a-4194-a4ba-018f4377d37d",
+      "name": "Semantic indexing",
+      "nodeNames": [
+        "Read unembedded policies",
+        "Create semantic embeddings",
+        "Save vectors"
+      ],
+      "description": "Embed policy texts and persist 1536-dimensional vectors in isolated NovaCart knowledge."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "id": "GAMc2rSCgXsqrCUx",
+  "name": "NovaCart \u2022 Acceptance Scenario",
+  "active": false,
+  "isArchived": false,
+  "versionId": "326471b8-b470-4678-9d17-55e7158c189d",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 3,
+  "createdAt": "2026-11-05T20:38:22.988Z",
+  "updatedAt": "2026-11-05T20:40:55.104Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "Manual simulated email acceptance journey. Actual Gmail delivery is not implied.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Run fictional laptop request": {
+      "main": [
+        [
+          {
+            "node": "Synthetic customer email envelope",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthetic customer email envelope": {
+      "main": [
+        [
+          {
+            "node": "Run eight-agent resolution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "6699f764-686a-4e1e-954c-68f87e494539",
+      "name": "Run fictional laptop request",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "484d197c-6619-43f8-abf5-0067654c59a9",
+      "name": "Synthetic customer email envelope",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\"external_id\":\"novacart-acceptance-002\",\"email\":\"customer001@example.invalid\",\"order_id\":\"NC-O0001\",\"message\":\"I ordered a laptop 10 days ago, but it has not arrived. I want a refund.\",\"verified_identity\":true}",
+        "options": {}
+      }
+    },
+    {
+      "id": "f9d1e8da-2065-418e-9e0c-15328c2393be",
+      "name": "Run eight-agent resolution",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        496,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "GEl1sVLiJOiludo2"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "fa071c1c-9fc4-4db2-a2fe-8691bcb0c678",
+      "name": "Simulated email journey",
+      "nodeNames": [
+        "Synthetic customer email envelope",
+        "Run eight-agent resolution"
+      ],
+      "description": "Inject the fictional laptop refund request. Does not send or fabricate a real Gmail message."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

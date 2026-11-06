@@ -1,0 +1,106 @@
+{
+  "id": "nidargvMMiVqNhBt",
+  "name": "NovaCart \u2022 Backend Connectivity",
+  "active": false,
+  "isArchived": false,
+  "versionId": "2b69400a-7615-43b7-b0ad-0e87d9f41b34",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 2,
+  "createdAt": "2026-11-05T20:28:10.286Z",
+  "updatedAt": "2026-11-05T20:28:10.286Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "Manual read-only check of NovaCart Supabase RPC.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Manual connection test": {
+      "main": [
+        [
+          {
+            "node": "Read NovaCart backend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "99f3931c-e4e5-4af6-be69-cf117f3a62e1",
+      "name": "Manual connection test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "11ba01c0-2a3a-478f-9420-48f4b2e2ce97",
+      "name": "Read NovaCart backend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_dashboard",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {}
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "9bacc08e-19ef-4cbb-abb3-3611c2c4e314",
+      "name": "Backend validation",
+      "nodeNames": [
+        "Read NovaCart backend"
+      ],
+      "description": "Read isolated NovaCart data using the existing Supabase credential."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

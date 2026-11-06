@@ -1,0 +1,140 @@
+{
+  "id": "cDja7qaHBk4pPIEs",
+  "name": "NovaCart \u2022 Staff Support Webhook",
+  "active": false,
+  "isArchived": false,
+  "versionId": "d07b8e3b-a0f7-4705-9afa-74d488ad1727",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 3,
+  "createdAt": "2026-11-05T20:43:40.702Z",
+  "updatedAt": "2026-11-05T20:43:40.702Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "NovaCart sandbox integration. Saved inactive; activation requires production approval.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Authenticated staff webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize staff request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize staff request": {
+      "main": [
+        [
+          {
+            "node": "Resolve verified case",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "45aefff6-b47e-4119-8767-dde4902e6ce3",
+      "name": "Authenticated staff webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "novacart-support",
+        "authentication": "n8nOAuth2",
+        "requireExecuteAccess": true,
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "webhookId": "97fc8f56-4496-49dc-9b50-49d23d0263bb"
+    },
+    {
+      "id": "0edcd81f-b8ae-4217-92ee-194a1b8d6ac5",
+      "name": "Normalize staff request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify($json.body ?? $json) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "f512199f-2e64-427b-9c5f-60cacb4943cc",
+      "name": "Resolve verified case",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        496,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "GEl1sVLiJOiludo2"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "6018ec2d-3453-4a9a-9dea-04881895d0e1",
+      "name": "Authenticated support intake",
+      "nodeNames": [
+        "Normalize staff request",
+        "Resolve verified case"
+      ],
+      "description": "Only n8n users with workflow execute access may submit verified synthetic support cases."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

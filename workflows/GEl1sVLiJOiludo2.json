@@ -1,0 +1,689 @@
+{
+  "id": "GEl1sVLiJOiludo2",
+  "name": "NovaCart \u2022 Support Resolution Engine",
+  "active": false,
+  "isArchived": false,
+  "versionId": "1f618eb2-8bd3-4456-ae2d-2de907abc51c",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 16,
+  "createdAt": "2026-11-05T20:31:43.634Z",
+  "updatedAt": "2026-11-05T20:40:47.319Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "Accept one verified synthetic support envelope {external_id,email,order_id,message,verified_identity:true}. Calls RAG and eight role workflows; all outbound actions held.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Verified sandbox request": {
+      "main": [
+        [
+          {
+            "node": "Prepare verified case",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare verified case": {
+      "main": [
+        [
+          {
+            "node": "Ignore duplicate requests",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ignore duplicate requests": {
+      "main": [
+        [
+          {
+            "node": "Embed customer request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embed customer request": {
+      "main": [
+        [
+          {
+            "node": "Retrieve policies",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve policies": {
+      "main": [
+        [
+          {
+            "node": "Merge policy evidence",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge policy evidence": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Intent Classification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Intent Classification": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Knowledge Retrieval",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Knowledge Retrieval": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Order Resolution",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Order Resolution": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Refund Decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Refund Decision": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Customer Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Customer Response": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 Human Escalation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 Human Escalation": {
+      "main": [
+        [
+          {
+            "node": "NovaCart \u2022 QA Evaluation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NovaCart \u2022 QA Evaluation": {
+      "main": [
+        [
+          {
+            "node": "Commit guarded result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit guarded result": {
+      "main": [
+        null,
+        [
+          {
+            "node": "Record recoverable failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "62b3e05c-109c-4f74-a050-47060885d238",
+      "name": "Verified sandbox request",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "inputSource": "passthrough"
+      }
+    },
+    {
+      "id": "9c955e6d-5f4c-49a6-a9c1-f28fe8a590b6",
+      "name": "Prepare verified case",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_prepare",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({p:$json}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    },
+    {
+      "id": "4b299f2a-f933-4bd1-9b23-4f9ebf174ff4",
+      "name": "Ignore duplicate requests",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.4,
+      "position": [
+        496,
+        128
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.duplicate }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "c1e33266-0e56-494e-b135-c2efaa8700d0",
+      "name": "Embed customer request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"text-embedding-3-small\",input:$json.message}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput",
+      "credentials": {}
+    },
+    {
+      "id": "6e3ee5c7-28f8-485b-8d45-02649c4b99f9",
+      "name": "Retrieve policies",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        944,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_retrieve",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({query_embedding:$json.data[0].embedding}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput",
+      "credentials": {}
+    },
+    {
+      "id": "7e32ff6a-95fc-4e3b-927f-05ee82840bf9",
+      "name": "Merge policy evidence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        128
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const ctx=$('Prepare verified case').first().json; const rag=$input.first().json; if(!rag.policies?.length) throw new Error('RAG_NO_RESULTS'); const merged=[...rag.policies,...ctx.policies.filter(x=>['KB-004','KB-008','KB-009','KB-025'].includes(x.id)&&!rag.policies.some(y=>y.id===x.id))]; return [{json:{...ctx,policies:merged,retrieval_mode:'semantic',agents:[]}}];"
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "776a204c-a79d-4981-9e08-d71406ee8f6b",
+      "name": "NovaCart \u2022 Orchestrator",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        800,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gapA1u5ebbAQ2hPe"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "b2e92f2b-d204-4c53-b7b3-d055cf7e4eef",
+      "name": "NovaCart \u2022 Intent Classification",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1024,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "Ct08zmtjQluSsr73"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "7eae1597-1a92-4235-ba19-4ca7fc63be38",
+      "name": "NovaCart \u2022 Knowledge Retrieval",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1248,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "8e7KgSXcW99sXiqG"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "b7940e70-8d9a-4c19-b2ff-efd182331100",
+      "name": "NovaCart \u2022 Order Resolution",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1472,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "KuFbhRMYF50ikQan"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "132da939-cdfe-492c-83ea-7a61a9c76c37",
+      "name": "NovaCart \u2022 Refund Decision",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1696,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "nSqsu7cBfGBCWim5"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "a1b5fcff-fea2-415c-8fed-eebace0a99e8",
+      "name": "NovaCart \u2022 Customer Response",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1920,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "AVLTMSJp7gx0MLzI"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "abb56967-70da-4353-bddb-a08128767bdc",
+      "name": "NovaCart \u2022 Human Escalation",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        2144,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "wxmX1ulQZC8lFXUW"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "ae2ac74e-325e-48a2-9a28-9d4952c43395",
+      "name": "NovaCart \u2022 QA Evaluation",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        2368,
+        128
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "H9GLnx8cXOdRj89s"
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "ea83f9f2-66f1-4b06-829b-bdf80a8902d2",
+      "name": "Commit guarded result",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1328,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_finalize",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({p:$json}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput",
+      "credentials": {}
+    },
+    {
+      "id": "c186ea18-95d5-47b3-b457-402b1ce49b01",
+      "name": "Record recoverable failure",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1400,
+        500
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_record_failure",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({p: {ticket_id: $(\"Prepare verified case\").first().json.ticket_id, execution_id: $execution.id, message: \"Provider or agent execution failed; inspect n8n execution\"} }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {}
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "1617ccaa-ba86-48a6-87f3-ab137a3825c2",
+      "name": "Guarded support execution",
+      "nodeNames": [
+        "Prepare verified case",
+        "Ignore duplicate requests",
+        "Embed customer request",
+        "Retrieve policies",
+        "Merge policy evidence",
+        "NovaCart \u2022 Orchestrator",
+        "NovaCart \u2022 Intent Classification",
+        "NovaCart \u2022 Knowledge Retrieval",
+        "NovaCart \u2022 Order Resolution",
+        "NovaCart \u2022 Refund Decision",
+        "NovaCart \u2022 Customer Response",
+        "NovaCart \u2022 Human Escalation",
+        "NovaCart \u2022 QA Evaluation",
+        "Commit guarded result",
+        "Record recoverable failure"
+      ],
+      "description": "Verified context, eight reasoning roles, guarded commit and durable failure escalation."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

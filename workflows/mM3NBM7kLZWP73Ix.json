@@ -1,0 +1,127 @@
+{
+  "id": "mM3NBM7kLZWP73Ix",
+  "name": "NovaCart \u2022 Gmail Intake",
+  "active": false,
+  "isArchived": false,
+  "versionId": "a07467e8-869f-480d-8da4-a1eb2f9b297f",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 2,
+  "createdAt": "2026-11-05T20:43:40.180Z",
+  "updatedAt": "2026-11-05T20:43:40.180Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "NovaCart sandbox integration. Saved inactive; activation requires production approval.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "NovaCart sandbox emails": {
+      "main": [
+        [
+          {
+            "node": "Save unverified email for review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "f600fade-cd42-487f-a268-c6e30086b843",
+      "name": "NovaCart sandbox emails",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "oAuth2",
+        "simple": false,
+        "filters": {
+          "q": "subject:NOVACART_SANDBOX label:novacart-demo",
+          "readStatus": "both"
+        },
+        "options": {
+          "downloadAttachments": false
+        }
+      },
+      "credentials": {}
+    },
+    {
+      "id": "943fac07-7be9-4404-8c98-5b9267694aeb",
+      "name": "Save unverified email for review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_inbound_unverified",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({external_id:\"gmail:\"+$json.id,message:$json.text}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "88661be3-ba0c-479a-81fa-33f48d7accc5",
+      "name": "Identity verification queue",
+      "nodeNames": [
+        "Save unverified email for review"
+      ],
+      "description": "Deduplicate by Gmail ID and hold unverified email for staff identity verification; no order data disclosed."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}

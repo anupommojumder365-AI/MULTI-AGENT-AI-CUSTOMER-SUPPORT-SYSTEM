@@ -1,0 +1,118 @@
+{
+  "id": "cNcIdZCQ1gq7xs21",
+  "name": "NovaCart \u2022 Monitoring and Reporting",
+  "active": false,
+  "isArchived": false,
+  "versionId": "2bf48014-efca-460c-bf42-8fedcf253857",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "nodeCount": 2,
+  "createdAt": "2026-11-05T20:43:42.139Z",
+  "updatedAt": "2026-11-05T20:43:42.139Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "tags": [],
+  "parentFolderId": null,
+  "description": "NovaCart sandbox integration. Saved inactive; activation requires production approval.",
+  "scopes": [
+    "execution:delete",
+    "execution:list",
+    "execution:read",
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "connections": {
+    "Hourly review": {
+      "main": [
+        [
+          {
+            "node": "Recover stale cases and report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "e069f210-bd87-48f6-88f7-5bede4f650b2",
+      "name": "Hourly review",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "8c73a25a-e762-4572-99f0-c290206e73dc",
+      "name": "Recover stale cases and report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_maintenance",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "credentials": {}
+    }
+  ],
+  "nodeGroups": [
+    {
+      "id": "1a8935be-2245-409c-a332-7d367d34fb2d",
+      "name": "Operations maintenance",
+      "nodeNames": [
+        "Recover stale cases and report"
+      ],
+      "description": "Escalate stale executions and record queue counts without sending outbound messages."
+    }
+  ],
+  "activeVersion": null,
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
+}
