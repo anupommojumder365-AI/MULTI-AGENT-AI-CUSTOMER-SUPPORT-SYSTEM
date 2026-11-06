@@ -1,14 +1,14 @@
 {
   "id": "6BEn5wfBp77ImwML",
-  "name": "NovaCart \u2022 Knowledge Indexing",
+  "name": "NovaCart • Knowledge Indexing",
   "active": false,
   "isArchived": false,
-  "versionId": "b28010dc-4174-4127-8109-405656ef17ea",
+  "versionId": "3239af42-13d5-4e5a-8fea-9008326a3840",
   "activeVersionId": null,
   "triggerCount": 0,
   "nodeCount": 4,
   "createdAt": "2026-11-05T20:30:46.276Z",
-  "updatedAt": "2026-11-05T20:30:46.276Z",
+  "updatedAt": "2026-11-06T11:24:12.472Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true
@@ -97,7 +97,7 @@
       ],
       "parameters": {
         "method": "POST",
-        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_embedding_batch",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_mistral_batch",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -109,34 +109,7 @@
       },
       "retryOnFail": true,
       "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "credentials": {}
-    },
-    {
-      "id": "bb3af57e-2563-4d1e-bf40-6ca7626ffd01",
-      "name": "Create semantic embeddings",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        496,
-        128
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/embeddings",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "openAiApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({model:\"text-embedding-3-small\",input:$json.entries.map(x=>x.text)}) }}",
-        "options": {
-          "timeout": 60000
-        }
-      },
-      "retryOnFail": true,
-      "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "credentials": {}
+      "waitBetweenTries": 2000
     },
     {
       "id": "21856841-ac27-415b-b5f7-2fcef56dde44",
@@ -149,7 +122,7 @@
       ],
       "parameters": {
         "method": "POST",
-        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_save_embeddings",
+        "url": "https://yhssfzpsujhtngjrkauv.supabase.co/rest/v1/rpc/novacart_mistral_save",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -161,23 +134,32 @@
       },
       "retryOnFail": true,
       "maxTries": 3,
-      "waitBetweenTries": 2000,
-      "credentials": {}
-    }
-  ],
-  "nodeGroups": [
+      "waitBetweenTries": 2000
+    },
     {
-      "id": "6c97c862-fa9a-4194-a4ba-018f4377d37d",
-      "name": "Semantic indexing",
-      "nodeNames": [
-        "Read unembedded policies",
-        "Create semantic embeddings",
-        "Save vectors"
+      "id": "3bad8947-954b-47e5-8d2f-f792253cfbe3",
+      "name": "Create semantic embeddings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        650,
+        200
       ],
-      "description": "Embed policy texts and persist 1536-dimensional vectors in isolated NovaCart knowledge."
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({model:\"mistral-embed\",input:$json.entries.map(x=>x.text)}) }}",
+        "options": {
+          "timeout": 60000
+        }
+      }
     }
   ],
-  "activeVersion": null,
+  "nodeGroups": [],
   "meta": {
     "aiBuilderAssisted": true,
     "builderVariant": "mcp"
